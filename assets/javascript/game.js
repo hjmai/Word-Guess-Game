@@ -1,9 +1,8 @@
-var wordArr = ["hello", "world", "stuff", "hi", "zoo", "no", "blasphemy"];
+var wordArr = ["hello", "world", "stuff", "zoo", "blasphemy", "dog", "cat", "coding", "frustration", "captain", "office", "brain"];
 var wordPicked = "";
 var correctLetters = [];
 var wrongLetters = [];
 var guessWord = document.getElementById("guessWord");
-var correctLetterSpan = document.getElementById("correctLetters");
 var wrongLetterSpan = document.getElementById("wrongLetters");
 var attemptSpan = document.getElementById("attempts");
 var winSpan = document.getElementById("winCounter");
@@ -12,16 +11,25 @@ var winCount = 0;
 
 /* All Functions Go Here*/
 function pickWord(){
+    reset();
     wordPicked = wordArr[Math.floor(Math.random()*wordArr.length)];
     attempts = 10;
     correctLetters = [];
     wrongLetters = [];
 }
 
-function populateText(){
+function reset(){
     guessWord.innerHTML = "";
-    correctLetterSpan.innerHTML = "";
     wrongLetterSpan.innerHTML = "";
+}
+
+function skip(){
+    pickWord();
+    populateText();
+}
+
+function populateText(){
+    reset();
     attemptSpan.innerHTML = "";
     winSpan.innerHTML = "";
 
@@ -37,17 +45,10 @@ function populateText(){
         guessWord.appendChild(char);
     }
 
-    // Display Correct Letters
-    for(var j = 0; j < correctLetters.length; j++){
-        var char = document.createElement(null);
-        char.textContent = correctLetters[j];
-        correctLetterSpan.appendChild(char);
-    }
-
     // Display Wrong Letters
     for(var k = 0; k < wrongLetters.length; k++){
         var char = document.createElement(null);
-        char.textContent = wrongLetters[k];
+        char.textContent = wrongLetters[k]+' ';
         wrongLetterSpan.appendChild(char);
     }
     
@@ -63,13 +64,22 @@ function populateText(){
 }
 
 document.onkeyup = function(event){
-    if(wordPicked.indexOf(event.key) >= 0){
-        correctLetters.push(event.key);
+    if(wrongLetters.indexOf(event.key) === -1 && event.key !== 'Enter'){
+        if(wordPicked.indexOf(event.key) >= 0){
+            correctLetters.push(event.key);
+        }
+        else{
+            wrongLetters.push(event.key);
+            attempts--;
+            if(attempts == 0){
+                pickWord();
+            }
+        }
     }
-    else{
-        wrongLetters.push(event.key);
-        attempts--;
-        if(attempts == 0){
+    if(event.key === 'Enter'){
+        if(wordPicked === guessWord.textContent){
+            winCount++;
+            reset();         
             pickWord();
         }
     }
@@ -80,11 +90,3 @@ document.onkeyup = function(event){
 
 pickWord();
 populateText();
-
-if(wordPicked === guessWord.textContent){
-    winCount++;
-    guessWord.innerHTML = "";
-    correctLetterSpan.innerHTML = "";
-    wrongLetterSpan.innerHTML = "";            
-    pickWord();
-}

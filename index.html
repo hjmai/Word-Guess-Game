@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>    
 </head>
 <body>
-    <h1>Hangman!</h1>
-    <div>Word: <span id="guessWord"></span></div>
-    <div>Correct Letters: <span id="correctLetters"></span></div>
-    <div>Wrong Letters: <span id="wrongLetters"></span></div>
-    <div>Attempts Left: <span id="attempts"></span></div>
-    <div>Win Counter: <span id="winCounter"></span></div>
+    <div class="container">
+        <h1>Hangman!</h1>
+        <h3><br><span id="guessWord"></span></h3>
+        <div>Wrong Letters:<br><span id="wrongLetters"></span></div>
+        <div>Attempts Left:<span id="attempts"></span></div>
+        <div>Win Counter: <span id="winCounter"></span></div>
+        <div style="font-weight: bold"><br>Hit enter when you've seen your correct word!</div>
+        <button type="button" class="btn btn-primary" onclick="skip()">Skip Word</button>
+    </div>
      <!-- Scripts go here -->
     <script src="assets/javascript/game.js"></script>
 </body>
