@@ -1,5 +1,17 @@
 .container{
     text-align: center;
     margin: auto;
+    height: 100vh;
+}
+
+body{
+    color: black;
+    background-image: url("../images/bg.jpg");
+}
+.top{
+    padding-top: 3%;
+    padding-bottom:6%;
+}
+#pkmnImg{
     width: 50%;
 }
