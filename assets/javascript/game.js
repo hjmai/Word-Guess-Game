@@ -1,5 +1,6 @@
 var wordArr = ["hello", "world", "stuff", "zoo", "blasphemy", "dog", "cat", "coding", "frustration", "captain", "office", "brain"];
 var wordPicked = "";
+var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var correctLetters = [];
 var wrongLetters = [];
 var guessWord = document.getElementById("guessWord");
@@ -64,15 +65,17 @@ function populateText(){
 }
 
 document.onkeyup = function(event){
-    if(wrongLetters.indexOf(event.key) === -1 && event.key !== 'Enter'){
-        if(wordPicked.indexOf(event.key) >= 0){
-            correctLetters.push(event.key);
-        }
-        else{
-            wrongLetters.push(event.key);
-            attempts--;
-            if(attempts == 0){
-                pickWord();
+    if(letterArray.indexOf(event.key) >= 0){
+        if(wrongLetters.indexOf(event.key) === -1 && event.key !== 'Enter'){
+            if(wordPicked.indexOf(event.key) >= 0){
+                correctLetters.push(event.key);
+            }
+            else{
+                wrongLetters.push(event.key);
+                attempts--;
+                if(attempts == 0){
+                    pickWord();
+                }
             }
         }
     }
